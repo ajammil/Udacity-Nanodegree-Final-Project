@@ -46,6 +46,9 @@ pipeline { environment {
         }
         stage('Update hosted image'){
             steps{
+                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    AWS("eks --region eu-central-1 update-kubeconfig --name udacity-capstone")
+            }
                 sh "kubectl set image deployment/capstone-deployment capstone=$registry:$BUILD_NUMBER"
             }
         
