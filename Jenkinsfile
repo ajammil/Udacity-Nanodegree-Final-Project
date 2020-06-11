@@ -1,6 +1,6 @@
 pipeline { environment {
     registry = "ajammil/udacity_capstone_project"
-    registryCredential = 'dockerhub_credentials'
+    MY_PASSWORD = 'dockerhub_password'
   }
      agent any
      stages {
@@ -19,6 +19,7 @@ pipeline { environment {
          stage('Pushing Docker Image to Docker Hub') {
             steps{
                 script {
+                    sh "echo "$MY_PASSWORD" | docker login --username ajammil --password-stdin"
                     sh "docker push $registry:$BUILD_NUMBER"
                 }
             }
