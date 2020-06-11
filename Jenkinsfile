@@ -25,7 +25,7 @@ pipeline { environment {
                     sh "docker push $registry:$BUILD_NUMBER"
                     // docker.withRegistry( '', registryCredential ) {
                     // dockerImage.push()
-                    }
+                    
                 }
 
             }
