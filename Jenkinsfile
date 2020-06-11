@@ -20,13 +20,13 @@ pipeline { environment {
          stage('Pushing Docker Image to Docker Hub') {
             steps{
                 script {
-                    // sh "echo "$MY_PASSWORD" | docker login --username ajammil --password-stdin"
+                    sh "echo ""$MY_PASSWORD"" | docker login --username ajammil --password-stdin"
                     // sh script: 'docker login --username ajammil --password-stdin', stdin: "$MY_PASSWORD"
                     sh "docker push $registry:$BUILD_NUMBER"
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
+                    // docker.withRegistry( '', registryCredential ) {
+                    // dockerImage.push()
                     
-                    }
+                    // }
 
                 }
         
