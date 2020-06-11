@@ -29,7 +29,7 @@ pipeline { environment {
         
         }
 
-        stage('Trigger kubectl update')
+        stage('Update hosted image'){
             steps{
                 sh "kubectl set image deployment/capstone-deployment capstone=$registry:$BUILD_NUMBER"
             }
