@@ -21,9 +21,17 @@ pipeline { environment {
                 script {
                     docker.withRegistry( '', registryCredential ) {
                     dockerImage.push()
-                    sh "docker rmi $registry:$BUILD_NUMBER"
                     }
+                    sh "docker rmi $registry:$BUILD_NUMBER"
+
                 }
+            }
+        
+        }
+
+        stage('Trigger kubectl update')
+            steps{
+                sh "kubectl set image deployment/capstone-deployment capstone=$registry:$BUILD_NUMBER"
             }
         
         }
