@@ -19,16 +19,19 @@ pipeline { environment {
          stage('Pushing Docker Image to Docker Hub') {
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                    }
-                    sh "docker rmi $registry:$BUILD_NUMBER"
-
+                    sh "docker push $registry:$BUILD_NUMBER"
                 }
             }
         
         }
-
+        stage('Cleanup') {
+            steps{
+                script {
+                    sh "docker rmi $registry:$BUILD_NUMBER"
+                }
+            }
+        
+        }
         stage('Update hosted image'){
             steps{
                 sh "kubectl set image deployment/capstone-deployment capstone=$registry:$BUILD_NUMBER"
