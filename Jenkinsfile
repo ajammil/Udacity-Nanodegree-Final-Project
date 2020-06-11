@@ -1,3 +1,4 @@
+@Library('github.com/releaseworks/jenkinslib') _
 pipeline { environment {
     registry = "ajammil/udacity_capstone_project"
     registryCredential = 'dockerhub_credentials'
