@@ -21,7 +21,7 @@ pipeline { environment {
             steps{
                 script {
                     withCredentials([string(credentialsId: 'dockerhub_password', variable: 'MY_PASSWORD')]) {
-                            sh "echo "${MY_PASSWORD}" | docker login --username ajammil --password-stdin"
+                            sh "echo '${MY_PASSWORD}' | docker login --username ajammil --password-stdin"
                         }
                     // sh "echo ""$MY_PASSWORD"" | docker login --username ajammil --password-stdin"
 
