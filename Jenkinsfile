@@ -26,10 +26,11 @@ pipeline { environment {
                     docker.withRegistry( '', registryCredential ) {
                     dockerImage.push()
                     
-                }
+                    }
 
-            }
+                }
         
+            }
         }
         stage('Cleanup') {
             steps{
